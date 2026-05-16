@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home</title>
+
+<style>
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ===== BODY ===== */
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+
+    background-image:
+    linear-gradient(rgba(0,0,0,0.40),
+    rgba(0,0,0,0.40)),
+    url("library100.png");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    min-height:100vh;
+}
+
+/* ===== NAVBAR ===== */
+.home{
+    background:linear-gradient(to right,#ff4fd8,#6a5cff,#00c6ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    padding:18px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.home a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+    padding:12px 22px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.home a:hover{
+    background:white;
+    color:#ff1493;
+    transform:translateY(-3px);
+}
+
+.home a.active{
+    background:#fff;
+    color:#6a5cff;
+}
+
+/* ===== HERO ===== */
+.hero{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:90px 20px;
+}
+
+.hero-box{
+    width:95%;
+    max-width:1050px;
+    background:rgba(255,255,255,0.15);
+    border-radius:25px;
+    padding:55px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    text-align:center;
+}
+
+/* ===== TITLE ===== */
+.hero h1{
+    font-size:62px;
+    color:#ff66cc;
+    margin-bottom:25px;
+    text-shadow:3px 3px 12px black;
+}
+
+/* ===== ANIMATED TEXT ===== */
+.marquee {
+    overflow:hidden;
+    white-space:nowrap;
+    margin-bottom:35px;
+}
+
+.marquee span{
+    display:inline-block;
+    font-size:34px;
+    font-weight:bold;
+    color:#66e3ff;
+    text-shadow:2px 2px 8px black;
+    animation:move 12s linear infinite;
+}
+
+@keyframes move{
+    from {transform:translateX(100%);}
+    to {transform:translateX(-100%);}
+}
+
+/* ===== PARAGRAPH ===== */
+.hero p{
+    color:white;
+    font-size:22px;
+    line-height:1.9;
+    margin-bottom:22px;
+    text-shadow:2px 2px 8px black;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:16px 38px;
+    background:#ff4fd8;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:20px;
+    font-weight:bold;
+    transition:0.3s;
+    box-shadow:0 0 18px #ff4fd8;
+}
+
+.btn:hover{
+    background:#00c6ff;
+    transform:scale(1.05);
+}
+
+/* ===== FEATURES ===== */
+.features{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:45px;
+}
+
+.feature-box{
+    background:rgba(255,255,255,0.15);
+    padding:25px;
+    width:250px;
+    border-radius:22px;
+    transition:0.3s;
+    backdrop-filter:blur(10px);
+}
+
+.feature-box:hover{
+    transform:translateY(-8px) scale(1.03);
+    background:rgba(255,255,255,0.22);
+}
+
+.feature-box h3{
+    color:#ffcc00;
+    margin-bottom:12px;
+    font-size:24px;
+}
+
+.feature-box p{
+    font-size:17px;
+    color:white;
+    line-height:1.7;
+}
+
+/* ===== FOOTER ===== */
+footer{
+    background:linear-gradient(to right,#ff4fd8,#6a5cff,#00c6ff);
+    color:white;
+    text-align:center;
+    padding:22px;
+    margin-top:40px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+
+    .home{
+        flex-wrap:wrap;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .marquee span{
+        font-size:24px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="home">
+<a href="index.html">Home</a>
+<a href="book.html">Books</a>
+<a href="order.html">Order</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+
+<div class="hero-box">
+
+<h1>📚 Fitawrari Gebeyehu Library</h1>
+
+<div class="marquee">
+<span>Welcome to Fitawrari Gebeyehu Secondary School Library</span>
+</div>
+
+<p>
+Explore educational books, fiction books, and reference materials
+for Grade 9–12 students.
+</p>
+
+<a href="book.html" class="btn" id="btn">Explore Books</a>
+
+<!-- FEATURES -->
+<div class="features">
+
+<div class="feature-box">
+<h3>📖 Books</h3>
+<p>Access natural science, social science, and fiction books.</p>
+</div>
+
+<div class="feature-box">
+<h3>⚡ Fast Order</h3>
+<p>Students can order books easily through the online system.</p>
+</div>
+
+<div class="feature-box">
+<h3>🎓 Learning</h3>
+<p>Supports students with organized educational resources.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+<p>© 2026 Fitawrari Gebeyehu Library System</p>
+<p>All Rights Reserved</p>
+</footer>
+
+
+
+</body>
+</html>

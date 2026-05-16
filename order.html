@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Order Book</title>
+
+<style>
+
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ===== BODY ===== */
+
+body{
+
+    font-family:"Segoe UI", sans-serif;
+
+    background:
+    linear-gradient(
+    rgba(5,10,25,0.45),
+    rgba(5,10,25,0.45)
+    ),
+
+    url("library100.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    color:white;
+}
+
+/* ===== NAVBAR ===== */
+
+.order{
+
+    background:
+    linear-gradient(
+    to right,
+    #00e5ff,
+    #7c4dff,
+    #ff4fd8
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:22px;
+
+    padding:18px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.order a{
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    transition:0.3s;
+}
+
+.order a:hover{
+
+    background:white;
+
+    color:#7c4dff;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 15px white;
+}
+
+.order a.active{
+
+    background:white;
+
+    color:#ff4fd8;
+
+    box-shadow:0 0 18px white;
+}
+
+/* ===== MAIN CONTAINER ===== */
+
+.container{
+
+    width:88%;
+
+    max-width:850px;
+
+    margin:60px auto;
+
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:25px;
+
+    padding:45px;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,0.6);
+}
+
+/* ===== HEADINGS ===== */
+
+h1{
+
+    text-align:center;
+
+    font-size:52px;
+
+    color:#00ffff;
+
+    margin-bottom:15px;
+
+    text-shadow:
+    0 0 12px #00ffff,
+    0 0 25px #00c6ff,
+    3px 3px 10px black;
+}
+
+h2{
+
+    text-align:center;
+
+    color:#ffccff;
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+    text-shadow:
+    0 0 10px #ff4fd8,
+    2px 2px 8px black;
+}
+
+h3{
+
+    color:#00ffff;
+
+    margin-top:25px;
+
+    margin-bottom:15px;
+
+    font-size:28px;
+
+    text-shadow:
+    0 0 10px #00e5ff;
+}
+
+h4{
+
+    color:#ffcc00;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+    text-shadow:
+    0 0 8px #ff9800;
+}
+
+/* ===== LABEL ===== */
+
+label{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#ffffff;
+}
+
+/* ===== INPUTS ===== */
+
+input,
+select,
+textarea,
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:12px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    transition:0.3s;
+}
+
+/* ===== TEXT INPUT ===== */
+
+input[type="text"],
+select,
+textarea{
+
+    background:
+    rgba(255,255,255,0.92);
+
+    color:#111827;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.3);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    transform:scale(1.01);
+
+    box-shadow:
+    0 0 18px #00e5ff;
+}
+
+/* ===== RADIO ===== */
+
+input[type="radio"]{
+
+    width:auto;
+
+    margin-right:10px;
+
+    transform:scale(1.2);
+}
+
+/* ===== CATEGORY AREA ===== */
+
+.category{
+
+    background:
+    rgba(255,255,255,0.10);
+
+    padding:20px;
+
+    border-radius:18px;
+
+    margin-top:20px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* ===== SECTIONS ===== */
+
+.section{
+
+    display:none;
+
+    margin-top:25px;
+
+    background:
+    rgba(255,255,255,0.10);
+
+    padding:22px;
+
+    border-radius:18px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.35);
+}
+
+/* ===== SHOW SECTIONS ===== */
+
+#natural:checked ~ .natural{
+    display:block;
+}
+
+#social:checked ~ .social{
+    display:block;
+}
+
+#fiction:checked ~ .fiction{
+    display:block;
+}
+
+#other:checked ~ .other{
+    display:block;
+}
+
+/* ===== BUTTON ===== */
+
+button{
+
+    background:
+    linear-gradient(
+    to right,
+    #00e5ff,
+    #7c4dff,
+    #ff4fd8
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 0 18px rgba(255,255,255,0.3);
+}
+
+button:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+    0 0 20px #00ffff;
+}
+
+/* ===== INFO CARDS ===== */
+
+.features{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    margin-top:40px;
+}
+
+.card{
+
+    width:220px;
+
+    background:
+    rgba(255,255,255,0.12);
+
+    padding:22px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.35);
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    background:
+    rgba(255,255,255,0.20);
+}
+
+.card h3{
+
+    font-size:24px;
+
+    color:#ffcc00;
+
+    margin-bottom:10px;
+}
+
+.card p{
+
+    color:white;
+
+    line-height:1.7;
+
+    font-size:16px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+
+    background:
+    linear-gradient(
+    to right,
+    #00e5ff,
+    #7c4dff,
+    #ff4fd8
+    );
+
+    text-align:center;
+
+    padding:22px;
+
+    margin-top:50px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:white;
+}
+
+footer p{
+
+    margin-top:8px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:768px){
+
+    .order{
+        flex-wrap:wrap;
+    }
+
+    .container{
+        width:94%;
+        padding:28px;
+    }
+
+    h1{
+        font-size:38px;
+    }
+
+    h2{
+        font-size:26px;
+    }
+
+    .card{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+
+<nav class="order">
+
+<a href="index.html">Home</a>
+<a href="order.html" class="active">Order</a>
+
+
+
+</nav>
+
+<!-- ===== MAIN SECTION ===== -->
+
+<div class="container">
+
+<h1>📚 Order Books</h1>
+
+<h2>Fitawrari Gebeyehu Library System</h2>
+
+<form>
+
+<label>Student ID</label>
+
+<input type="text"
+placeholder="Enter Your Student ID">
+
+<div class="category">
+
+<h3>Choose Category</h3>
+
+<input type="radio"
+name="category"
+id="natural">
+
+Natural Science
+
+<br><br>
+
+<input type="radio"
+name="category"
+id="social">
+
+Social Science
+
+<br><br>
+
+<input type="radio"
+name="category"
+id="fiction">
+
+Fiction
+
+<br><br>
+
+<input type="radio"
+name="category"
+id="other">
+
+Other Books
+
+<!-- ===== NATURAL ===== -->
+
+<div class="section natural">
+
+<h4>🧪 Natural Subjects</h4>
+
+<select>
+
+<option selected disabled>
+Select Subject
+</option>
+
+<option>Biology</option>
+
+<option>Chemistry</option>
+
+<option>Physics</option>
+
+<option>Mathematics</option>
+
+<option>IT</option>
+
+</select>
+
+<button type="submit">
+Order Natural Book
+</button>
+
+</div>
+
+<!-- ===== SOCIAL ===== -->
+
+<div class="section social">
+
+<h4>🌍 Social Subjects</h4>
+
+<select>
+
+<option selected disabled>
+Select Subject
+</option>
+
+<option>Geography</option>
+
+<option>Economics</option>
+
+<option>History</option>
+
+<option>English</option>
+
+<option>Amharic</option>
+
+</select>
+
+<button type="submit">
+Order Social Book
+</button>
+
+</div>
+
+<!-- ===== FICTION ===== -->
+
+<div class="section fiction">
+
+<h4>📖 Fiction Books</h4>
+
+<select>
+
+<option selected disabled>
+Select Fiction Book
+</option>
+
+<option>The Alchemist</option>
+
+<option>Escape</option>
+
+<option>The Young Crusader</option>
+
+<option>Breaking The Chain</option>
+
+</select>
+
+<button type="submit">
+Order Fiction Book
+</button>
+
+</div>
+
+<!-- ===== OTHER ===== -->
+
+<div class="section other">
+
+<h4>✍ Other Books</h4>
+
+<textarea rows="4"
+placeholder="Type Book Name Here..."></textarea>
+
+<button type="submit">
+Order Book
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+<!-- ===== FEATURE CARDS ===== -->
+
+<div class="features">
+
+<div class="card">
+
+<h3>⚡ Fast</h3>
+
+<p>
+Quick and simple online ordering system.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📚 Smart</h3>
+
+<p>
+Organized library management for students.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🎓 Easy</h3>
+
+<p>
+Find and request books easily anytime.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+© 2026 Fitawrari Gebeyehu Library System
+
+<p>
+All Rights Reserved
+</p>
+
+</footer>
+
+</body>
+</html>
